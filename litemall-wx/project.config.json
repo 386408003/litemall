@@ -9,8 +9,8 @@
 		"uglifyFileName": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.0",
-	"appid": "wxa5b486c6b918ecfb",
+	"libVersion": "2.7.7",
+	"appid": "wx2af6d543943e87a7",
 	"projectname": "litemall-wx",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},

@@ -2,6 +2,8 @@ package org.linlinjava.litemall.admin.web;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.linlinjava.litemall.admin.annotation.RequiresPermissionsDesc;
 import org.linlinjava.litemall.admin.vo.RegionVo;
 import org.linlinjava.litemall.core.util.ResponseUtil;
 import org.linlinjava.litemall.db.domain.LitemallRegion;
@@ -25,12 +27,16 @@ public class AdminRegionController {
     @Autowired
     private LitemallRegionService regionService;
 
+    @RequiresPermissions("admin:region:clist")
+    @RequiresPermissionsDesc(menu = {"商场管理", "行政区域"}, button = "查询下级")
     @GetMapping("/clist")
     public Object clist(@NotNull Integer id) {
         List<LitemallRegion> regionList = regionService.queryByPid(id);
         return ResponseUtil.okList(regionList);
     }
 
+    @RequiresPermissions("admin:region:list")
+    @RequiresPermissionsDesc(menu = {"商场管理", "行政区域"}, button = "查询")
     @GetMapping("/list")
     public Object list() {
         List<RegionVo> regionVoList = new ArrayList<>();

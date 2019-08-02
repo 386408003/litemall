@@ -10,3 +10,4 @@
 * [3. 小商场](./wxmall.md)
 * [4. 管理后台](./admin.md)
 * [5. 轻商城](./mobmall.md)
+* [6. 课程预约](./wxreserve.md)

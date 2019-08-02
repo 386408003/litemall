@@ -767,6 +767,27 @@ CREATE TABLE `litemall_user_formid` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--2019-08-01 ZF 新增
+--
+-- Table structure for table `tianyu_course`
+--
+
+DROP TABLE IF EXISTS `tianyu_course`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tianyu_course` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL COMMENT '课程名称',
+  `total_time` int(5) DEFAULT '60' COMMENT '每节课程总时间',
+  `people_num` int(5) DEFAULT '1' COMMENT '课程人数',
+  `add_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `desc` varchar(255) DEFAULT NULL COMMENT '课程描述',
+  `deleted` tinyint(1) DEFAULT '0' COMMENT '逻辑删除',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='天瑜课程表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

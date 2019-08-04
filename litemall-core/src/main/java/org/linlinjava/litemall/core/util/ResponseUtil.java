@@ -24,6 +24,7 @@ import java.util.Map;
  * <ul>
  * <li> 401，参数错误，即前端没有传递后端需要的参数；
  * <li> 402，参数值错误，即前端传递的参数值不符合后端接收范围。
+ * <li> 403，数据已存在，即前端传递的参数值所要插入的数据已存在。
  * </ul>
  * <li> 5xx，后端错误，除501外，说明后端开发者应该继续优化代码，尽量避免返回后端错误码：
  * <ul>
@@ -115,6 +116,10 @@ public class ResponseUtil {
 
     public static Object badArgumentValue() {
         return fail(402, "参数值不对");
+    }
+
+    public static Object existingArgument() {
+        return fail(403, "数据已存在");
     }
 
     public static Object unlogin() {

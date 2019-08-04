@@ -788,6 +788,28 @@ CREATE TABLE `tianyu_course` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='天瑜课程表';
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `tianyu_course_plan`
+--
+
+DROP TABLE IF EXISTS `tianyu_course_plan`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tianyu_course_plan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_id` int(11) NOT NULL COMMENT '课程表的课程ID',
+  `people_left` int(5) NOT NULL DEFAULT '0' COMMENT '可预约人数',
+  `c_date` date NOT NULL COMMENT '上课日期',
+  `start_time` time NOT NULL COMMENT '上课时间',
+  `end_time` time NOT NULL COMMENT '下课时间',
+  `add_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `deleted` tinyint(1) DEFAULT '0' COMMENT '逻辑删除',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `course_date_time` (`course_id`,`c_date`,`start_time`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COMMENT='天瑜排课记录表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

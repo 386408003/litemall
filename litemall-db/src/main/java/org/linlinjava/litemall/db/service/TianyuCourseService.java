@@ -16,10 +16,10 @@ public class TianyuCourseService {
     @Resource
     private TianyuCourseMapper courseMapper;
 
-    public List<TianyuCourse> queryIndex() {
+    public List<TianyuCourse> queryAll() {
         TianyuCourseExample example = new TianyuCourseExample();
         example.or().andDeletedEqualTo(false);
-        example.setOrderByClause("add_time desc");
+        //example.setOrderByClause("add_time desc");
         return courseMapper.selectByExample(example);
     }
 

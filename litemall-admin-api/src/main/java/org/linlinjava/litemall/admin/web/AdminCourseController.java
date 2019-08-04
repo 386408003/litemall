@@ -15,7 +15,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/admin/course")
@@ -44,6 +47,23 @@ public class AdminCourseController {
             return ResponseUtil.badArgument();
         }
         return null;
+    }
+
+    @GetMapping("/options")
+    public Object options() {
+        List<TianyuCourse> courseList = courseService.queryAll();
+
+        List<Map<String, Object>> options = new ArrayList<>(courseList.size());
+        for (TianyuCourse course : courseList) {
+            Map<String, Object> option = new HashMap<>(2);
+            option.put("value", course.getId());
+            option.put("label", course.getName());
+            option.put("totalTime", course.getTotalTime());
+            option.put("peopleNum", course.getPeopleNum());
+            options.add(option);
+        }
+
+        return ResponseUtil.okList(options);
     }
 
     @RequiresPermissions("admin:course:create")

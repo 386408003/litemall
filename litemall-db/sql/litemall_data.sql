@@ -290,6 +290,17 @@ UNLOCK TABLES;
 
 LOCK TABLES `litemall_system` WRITE;
 /*!40000 ALTER TABLE `litemall_system` DISABLE KEYS */;
+INSERT INTO `tianyu`.`litemall_system` (`id`, `key_name`, `key_value`, `add_time`, `update_time`, `deleted`) VALUES ('17', 'tianyu_wx_home_title', '天瑜瑜伽工作室简介', '2019-08-11 20:03:34', '2019-08-11 20:03:34', '0');
+INSERT INTO `tianyu`.`litemall_system` (`id`, `key_name`, `key_value`, `add_time`, `update_time`, `deleted`) VALUES ('18', 'tianyu_wx_home_info', '天瑜瑜伽工作室课程体系属于人体功能恢复瑜伽体系，专注于身体功能恢复、神经控制、呼吸放松、塑形美体及孕期和产后体态管理课程的探索。开设有TTC瑜伽老师培训班、VIP私教理疗、精准VIP小班、精品小班等课程。', '2019-08-11 20:03:34', '2019-08-11 20:03:34', '0');
+INSERT INTO `tianyu`.`litemall_system` (`id`, `key_name`, `key_value`, `add_time`, `update_time`, `deleted`) VALUES ('19', 'tianyu_wx_about_name', '天瑜瑜珈工作室', '2019-08-11 20:03:34', '2019-08-11 20:03:34', '0');
+INSERT INTO `tianyu`.`litemall_system` (`id`, `key_name`, `key_value`, `add_time`, `update_time`, `deleted`) VALUES ('20', 'tianyu_wx_about_desc', '天瑜瑜珈工作室', '2019-08-11 20:03:34', '2019-08-11 20:03:34', '0');
+INSERT INTO `tianyu`.`litemall_system` (`id`, `key_name`, `key_value`, `add_time`, `update_time`, `deleted`) VALUES ('21', 'tianyu_wx_about_address', '郑州市经开区九大街航海路交叉口南500米', '2019-08-11 20:03:34', '2019-08-11 20:03:34', '0');
+INSERT INTO `tianyu`.`litemall_system` (`id`, `key_name`, `key_value`, `add_time`, `update_time`, `deleted`) VALUES ('22', 'tianyu_wx_about_linkPhone', '15617927721', '2019-08-11 20:03:34', '2019-08-11 20:03:34', '0');
+INSERT INTO `tianyu`.`litemall_system` (`id`, `key_name`, `key_value`, `add_time`, `update_time`, `deleted`) VALUES ('23', 'tianyu_wx_about_qqNumber', '386408003', '2019-08-11 20:03:34', '2019-08-11 20:03:34', '0');
+INSERT INTO `tianyu`.`litemall_system` (`id`, `key_name`, `key_value`, `add_time`, `update_time`, `deleted`) VALUES ('24', 'tianyu_wx_about_latitude', '34.718656', '2019-08-11 20:03:34', '2019-08-11 20:03:34', '0');
+INSERT INTO `tianyu`.`litemall_system` (`id`, `key_name`, `key_value`, `add_time`, `update_time`, `deleted`) VALUES ('25', 'tianyu_wx_about_longitude', '113.769854', '2019-08-11 20:03:34', '2019-08-11 20:03:34', '0');
+INSERT INTO `tianyu`.`litemall_system` (`id`, `key_name`, `key_value`, `add_time`, `update_time`, `deleted`) VALUES ('26', 'tianyu_wx_about_scale', '14', '2019-08-11 20:03:34', '2019-08-11 20:03:34', '0');
+INSERT INTO `tianyu`.`litemall_system` (`id`, `key_name`, `key_value`, `add_time`, `update_time`, `deleted`) VALUES ('27', 'tianyu_wx_about_version', '1.0.0', '2019-08-11 20:03:34', '2019-08-11 20:03:34', '0');
 /*!40000 ALTER TABLE `litemall_system` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -321,6 +332,50 @@ LOCK TABLES `litemall_user_formid` WRITE;
 /*!40000 ALTER TABLE `litemall_user_formid` DISABLE KEYS */;
 /*!40000 ALTER TABLE `litemall_user_formid` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping data for table `litemall_admin`
+--
+
+LOCK TABLES `litemall_admin` WRITE;
+/*!40000 ALTER TABLE `litemall_admin` DISABLE KEYS */;
+INSERT INTO `tianyu`.`litemall_admin` (`id`, `username`, `password`, `last_login_ip`, `last_login_time`, `avatar`, `add_time`, `update_time`, `deleted`, `role_ids`) VALUES ('6', 'tianyu', '$2a$10$ImjIDSP9s5I7QjbOu0KB4OWwRiZGuiQeIM2qRIB/7Mh3aPcPJhuvy', '0:0:0:0:0:0:0:1', '2019-08-11 20:07:28', 'https://wxapi.hkyzf.top/wx/storage/fetch/obgqjj3e2udfza7ssv6h.png', '2019-08-11 20:06:29', '2019-08-11 20:07:28', '0', '[10]');
+/*!40000 ALTER TABLE `litemall_admin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `litemall_role`
+--
+
+LOCK TABLES `litemall_role` WRITE;
+/*!40000 ALTER TABLE `litemall_role` DISABLE KEYS */;
+INSERT INTO `tianyu`.`litemall_role` (`id`, `name`, `desc`, `enabled`, `add_time`, `update_time`, `deleted`) VALUES ('10', '天瑜瑜珈工作室', '天瑜瑜珈工作室', '1', '2019-08-11 20:06:53', '2019-08-11 20:06:53', '0');
+/*!40000 ALTER TABLE `litemall_role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `litemall_storage`
+--
+
+LOCK TABLES `litemall_storage` WRITE;
+/*!40000 ALTER TABLE `litemall_storage` DISABLE KEYS */;
+INSERT INTO `tianyu`.`litemall_storage` (`id`, `key`, `name`, `type`, `size`, `url`, `add_time`, `update_time`, `deleted`) VALUES ('1', 'obgqjj3e2udfza7ssv6h.png', 'tyyj_logo.png', 'image/png', '394138', 'https://wxapi.hkyzf.top/wx/storage/fetch/obgqjj3e2udfza7ssv6h.png', '2019-08-11 20:06:25', '2019-08-11 20:06:25', '0');
+INSERT INTO `tianyu`.`litemall_storage` (`id`, `key`, `name`, `type`, `size`, `url`, `add_time`, `update_time`, `deleted`) VALUES ('2', '10zt5kuzcnkaf9em8krc.jpg', 'hd5.jpg', 'image/jpeg', '155309', 'https://wxapi.hkyzf.top/wx/storage/fetch/10zt5kuzcnkaf9em8krc.jpg', '2019-08-11 23:16:50', '2019-08-11 23:16:50', '0');
+INSERT INTO `tianyu`.`litemall_storage` (`id`, `key`, `name`, `type`, `size`, `url`, `add_time`, `update_time`, `deleted`) VALUES ('3', 'r1rj25xgy46s9z6yyyjj.jpg', 'hd4.jpg', 'image/jpeg', '92426', 'https://wxapi.hkyzf.top/wx/storage/fetch/r1rj25xgy46s9z6yyyjj.jpg', '2019-08-11 23:16:55', '2019-08-11 23:16:55', '0');
+INSERT INTO `tianyu`.`litemall_storage` (`id`, `key`, `name`, `type`, `size`, `url`, `add_time`, `update_time`, `deleted`) VALUES ('4', 'd3rupl4okusad502m9xu.jpg', 'hd3.jpg', 'image/jpeg', '98004', 'https://wxapi.hkyzf.top/wx/storage/fetch/d3rupl4okusad502m9xu.jpg', '2019-08-11 23:17:00', '2019-08-11 23:17:00', '0');
+INSERT INTO `tianyu`.`litemall_storage` (`id`, `key`, `name`, `type`, `size`, `url`, `add_time`, `update_time`, `deleted`) VALUES ('5', '6kr9rlnqdkshz7zo779v.jpg', 'hd2.jpg', 'image/jpeg', '63839', 'https://wxapi.hkyzf.top/wx/storage/fetch/6kr9rlnqdkshz7zo779v.jpg', '2019-08-11 23:17:03', '2019-08-11 23:17:03', '0');
+INSERT INTO `tianyu`.`litemall_storage` (`id`, `key`, `name`, `type`, `size`, `url`, `add_time`, `update_time`, `deleted`) VALUES ('6', 'a8ymhmn1drx2d752cbm1.jpg', 'hd1.jpg', 'image/jpeg', '104969', 'https://wxapi.hkyzf.top/wx/storage/fetch/a8ymhmn1drx2d752cbm1.jpg', '2019-08-11 23:17:07', '2019-08-11 23:17:07', '0');
+INSERT INTO `tianyu`.`litemall_storage` (`id`, `key`, `name`, `type`, `size`, `url`, `add_time`, `update_time`, `deleted`) VALUES ('7', 'phpken3uv771i2kbjfbi.png', 'a1.png', 'image/png', '4709', 'https://wxapi.hkyzf.top/wx/storage/fetch/phpken3uv771i2kbjfbi.png', '2019-08-13 16:24:40', '2019-08-13 16:24:40', '0');
+INSERT INTO `tianyu`.`litemall_storage` (`id`, `key`, `name`, `type`, `size`, `url`, `add_time`, `update_time`, `deleted`) VALUES ('8', 'rshq49sbwtb8aqaa44xf.png', 'a2.png', 'image/png', '5462', 'https://wxapi.hkyzf.top/wx/storage/fetch/rshq49sbwtb8aqaa44xf.png', '2019-08-13 16:25:11', '2019-08-13 16:25:11', '0');
+INSERT INTO `tianyu`.`litemall_storage` (`id`, `key`, `name`, `type`, `size`, `url`, `add_time`, `update_time`, `deleted`) VALUES ('11', '9yapsmrls75hec8xwqs8.png', 'a4.png', 'image/png', '5890', 'https://wxapi.hkyzf.top/wx/storage/fetch/9yapsmrls75hec8xwqs8.png', '2019-08-13 16:25:51', '2019-08-13 16:25:51', '0');
+INSERT INTO `tianyu`.`litemall_storage` (`id`, `key`, `name`, `type`, `size`, `url`, `add_time`, `update_time`, `deleted`) VALUES ('12', '98qe6n2rwzkabqic8ob4.png', 'a3.png', 'image/png', '5028', 'https://wxapi.hkyzf.top/wx/storage/fetch/98qe6n2rwzkabqic8ob4.png', '2019-08-13 16:26:47', '2019-08-13 16:26:47', '0');
+INSERT INTO `tianyu`.`litemall_storage` (`id`, `key`, `name`, `type`, `size`, `url`, `add_time`, `update_time`, `deleted`) VALUES ('13', 'k4jtryv7obsa1t7r6t42.jpg', 'tyyj_idx_0.jpg', 'image/jpeg', '280305', 'https://wxapi.hkyzf.top/wx/storage/fetch/k4jtryv7obsa1t7r6t42.jpg', '2019-08-13 22:41:03', '2019-08-13 22:41:03', '0');
+INSERT INTO `tianyu`.`litemall_storage` (`id`, `key`, `name`, `type`, `size`, `url`, `add_time`, `update_time`, `deleted`) VALUES ('14', 'xwo438kfttquw26bllvl.jpg', 'tyyj_idx_4.jpg', 'image/jpeg', '24796', 'https://wxapi.hkyzf.top/wx/storage/fetch/xwo438kfttquw26bllvl.jpg', '2019-08-13 22:41:12', '2019-08-13 22:41:12', '0');
+INSERT INTO `tianyu`.`litemall_storage` (`id`, `key`, `name`, `type`, `size`, `url`, `add_time`, `update_time`, `deleted`) VALUES ('15', '247skswj1ilgelrannng.jpg', 'tyyj_idx_1.jpg', 'image/jpeg', '90769', 'https://wxapi.hkyzf.top/wx/storage/fetch/247skswj1ilgelrannng.jpg', '2019-08-13 22:41:21', '2019-08-13 22:41:21', '0');
+INSERT INTO `tianyu`.`litemall_storage` (`id`, `key`, `name`, `type`, `size`, `url`, `add_time`, `update_time`, `deleted`) VALUES ('16', 'ne39l9a2jgsyt42oi8q2.jpg', 'tyyj_idx_5.jpg', 'image/jpeg', '71779', 'https://wxapi.hkyzf.top/wx/storage/fetch/ne39l9a2jgsyt42oi8q2.jpg', '2019-08-13 22:59:00', '2019-08-13 22:59:00', '0');
+INSERT INTO `tianyu`.`litemall_storage` (`id`, `key`, `name`, `type`, `size`, `url`, `add_time`, `update_time`, `deleted`) VALUES ('18', 'f9qibjalwjwnacvejw9e.png', 'tx_wdl.png', 'image/png', '510', 'https://wxapi.hkyzf.top/wx/storage/fetch/f9qibjalwjwnacvejw9e.png', '2019-08-15 10:22:43', '2019-08-15 10:22:43', '0');
+/*!40000 ALTER TABLE `litemall_storage` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -332,3 +387,17 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2018-12-10 18:49:23
+
+
+INSERT INTO `tianyu`.`litemall_ad` (`id`, `name`, `link`, `url`, `position`, `content`, `start_time`, `end_time`, `enabled`, `add_time`, `update_time`, `deleted`) VALUES ('4', '', '', 'https://wxapi.hkyzf.top/wx/storage/fetch/10zt5kuzcnkaf9em8krc.jpg', '2', '', '2019-08-12 22:37:59', '2019-12-31 00:00:00', '1', '2019-08-13 21:59:11', '2019-08-13 21:59:26', '0');
+INSERT INTO `tianyu`.`litemall_ad` (`id`, `name`, `link`, `url`, `position`, `content`, `start_time`, `end_time`, `enabled`, `add_time`, `update_time`, `deleted`) VALUES ('5', '', '', 'https://wxapi.hkyzf.top/wx/storage/fetch/r1rj25xgy46s9z6yyyjj.jpg', '2', '', '2019-08-12 22:38:45', '2019-12-31 00:00:00', '1', '2019-08-13 21:59:14', '2019-08-13 21:59:30', '0');
+INSERT INTO `tianyu`.`litemall_ad` (`id`, `name`, `link`, `url`, `position`, `content`, `start_time`, `end_time`, `enabled`, `add_time`, `update_time`, `deleted`) VALUES ('6', '', '', 'https://wxapi.hkyzf.top/wx/storage/fetch/d3rupl4okusad502m9xu.jpg', '2', '', NULL, NULL, '1', '2019-08-13 21:59:17', NULL, '0');
+INSERT INTO `tianyu`.`litemall_ad` (`id`, `name`, `link`, `url`, `position`, `content`, `start_time`, `end_time`, `enabled`, `add_time`, `update_time`, `deleted`) VALUES ('7', '', '', 'https://wxapi.hkyzf.top/wx/storage/fetch/6kr9rlnqdkshz7zo779v.jpg', '2', '', NULL, NULL, '1', '2019-08-13 21:59:20', NULL, '0');
+INSERT INTO `tianyu`.`litemall_ad` (`id`, `name`, `link`, `url`, `position`, `content`, `start_time`, `end_time`, `enabled`, `add_time`, `update_time`, `deleted`) VALUES ('8', '', '', 'https://wxapi.hkyzf.top/wx/storage/fetch/a8ymhmn1drx2d752cbm1.jpg', '2', '', NULL, NULL, '1', '2019-08-13 21:59:23', NULL, '0');
+INSERT INTO `tianyu`.`litemall_ad` (`id`, `name`, `link`, `url`, `position`, `content`, `start_time`, `end_time`, `enabled`, `add_time`, `update_time`, `deleted`) VALUES ('9', '首页', '', 'https://wxapi.hkyzf.top/wx/storage/fetch/ne39l9a2jgsyt42oi8q2.jpg', '1', '瑜伽', NULL, NULL, '1', '2019-08-13 22:59:12', '2019-08-13 22:59:27', '0');
+
+
+INSERT INTO `litemall`.`litemall_category` (`id`, `system_id`, `name`, `keywords`, `desc`, `pid`, `icon_url`, `pic_url`, `level`, `sort_order`, `add_time`, `update_time`, `deleted`) VALUES ('1036005', '2', '活动咨询', '', '', '0', 'https://wxapi.hkyzf.top/wx/storage/fetch/phpken3uv771i2kbjfbi.png', '', 'L1', '50', '2019-08-13 16:24:49', '2019-08-13 16:24:49', '0');
+INSERT INTO `litemall`.`litemall_category` (`id`, `system_id`, `name`, `keywords`, `desc`, `pid`, `icon_url`, `pic_url`, `level`, `sort_order`, `add_time`, `update_time`, `deleted`) VALUES ('1036006', '2', '课程预约', '', '', '0', 'https://wxapi.hkyzf.top/wx/storage/fetch/rshq49sbwtb8aqaa44xf.png', '', 'L1', '50', '2019-08-13 16:25:12', '2019-08-13 16:25:12', '0');
+INSERT INTO `litemall`.`litemall_category` (`id`, `system_id`, `name`, `keywords`, `desc`, `pid`, `icon_url`, `pic_url`, `level`, `sort_order`, `add_time`, `update_time`, `deleted`) VALUES ('1036007', '2', '我的预约', '', '', '0', 'https://wxapi.hkyzf.top/wx/storage/fetch/98qe6n2rwzkabqic8ob4.png', '', 'L1', '50', '2019-08-13 16:25:30', '2019-08-13 16:26:50', '0');
+INSERT INTO `litemall`.`litemall_category` (`id`, `system_id`, `name`, `keywords`, `desc`, `pid`, `icon_url`, `pic_url`, `level`, `sort_order`, `add_time`, `update_time`, `deleted`) VALUES ('1036008', '2', '关于我们', '', '', '0', 'https://wxapi.hkyzf.top/wx/storage/fetch/9yapsmrls75hec8xwqs8.png', '', 'L1', '50', '2019-08-13 16:25:53', '2019-08-13 16:25:53', '0');

@@ -532,6 +532,26 @@ public class WxAuthController {
         return ResponseUtil.ok();
     }
 
+    /**
+     *
+     * @param userId
+     * @param body
+     * @return
+     */
+    @PostMapping("bindPhoneInput")
+    public Object bindPhoneInput(@LoginUser Integer userId, @RequestBody String body) {
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+        LitemallUser user = userService.findById(userId);
+        String phoneNumber = JacksonUtil.parseString(body, "phoneNumber");
+        user.setMobile(phoneNumber);
+        if (userService.updateById(user) == 0) {
+            return ResponseUtil.updatedDataFailed();
+        }
+        return ResponseUtil.ok();
+    }
+
     @PostMapping("logout")
     public Object logout(@LoginUser Integer userId) {
         if (userId == null) {

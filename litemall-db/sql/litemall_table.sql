@@ -145,12 +145,15 @@ DROP TABLE IF EXISTS `litemall_category`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `litemall_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `system_id` int(11) NOT NULL DEFAULT '1' COMMENT '系统ID',
   `name` varchar(63) NOT NULL DEFAULT '' COMMENT '类目名称',
   `keywords` varchar(1023) NOT NULL DEFAULT '' COMMENT '类目关键字，以JSON数组格式',
   `desc` varchar(255) DEFAULT '' COMMENT '类目广告语介绍',
   `pid` int(11) NOT NULL DEFAULT '0' COMMENT '父类目ID',
   `icon_url` varchar(255) DEFAULT '' COMMENT '类目图标',
   `pic_url` varchar(255) DEFAULT '' COMMENT '类目图片',
+  `url_type` tinyint(3) DEFAULT NULL COMMENT '类目URL类型，1跳转类目，2跳转标签，3跳转页面',
+  `category_url` varchar(255) DEFAULT NULL COMMENT '类目URL',
   `level` varchar(255) DEFAULT 'L1',
   `sort_order` tinyint(3) DEFAULT '50' COMMENT '排序',
   `add_time` datetime DEFAULT NULL COMMENT '创建时间',
@@ -768,7 +771,7 @@ CREATE TABLE `litemall_user_formid` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---2019-08-01 ZF 新增
+-- 2019-08-01 ZF 新增
 --
 -- Table structure for table `tianyu_course`
 --
@@ -786,7 +789,7 @@ CREATE TABLE `tianyu_course` (
   `desc` varchar(255) DEFAULT NULL COMMENT '课程描述',
   `deleted` tinyint(1) DEFAULT '0' COMMENT '逻辑删除',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='天瑜课程表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='天瑜课程表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -808,7 +811,7 @@ CREATE TABLE `tianyu_course_plan` (
   `deleted` tinyint(1) DEFAULT '0' COMMENT '逻辑删除',
   PRIMARY KEY (`id`),
   UNIQUE KEY `course_date_time` (`course_id`,`c_date`,`start_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COMMENT='天瑜排课记录表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='天瑜排课记录表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

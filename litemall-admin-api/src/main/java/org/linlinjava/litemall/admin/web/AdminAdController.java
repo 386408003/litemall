@@ -29,12 +29,12 @@ public class AdminAdController {
     @RequiresPermissions("admin:ad:list")
     @RequiresPermissionsDesc(menu = {"推广管理", "广告管理"}, button = "查询")
     @GetMapping("/list")
-    public Object list(String name, String content,
+    public Object list(String name, String content, Integer position,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer limit,
                        @Sort @RequestParam(defaultValue = "add_time") String sort,
                        @Order @RequestParam(defaultValue = "desc") String order) {
-        List<LitemallAd> adList = adService.querySelective(name, content, page, limit, sort, order);
+        List<LitemallAd> adList = adService.querySelective(name, content, position, page, limit, sort, order);
         return ResponseUtil.okList(adList);
     }
 

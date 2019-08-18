@@ -95,4 +95,30 @@ public class LitemallSystemConfigService {
         system.setUpdateTime(LocalDateTime.now());
         systemMapper.insertSelective(system);
     }
+
+    /**
+     * 查询天瑜小程序首页描述
+     * @return
+     */
+    public List<LitemallSystem> listTianyuWxHome() {
+        LitemallSystemExample example = new LitemallSystemExample();
+        example.or().andKeyNameLike("tianyu_wx_home_%").andDeletedEqualTo(false);
+        List<LitemallSystem> systemList = systemMapper.selectByExample(example);
+        return systemList;
+    }
+
+    /**
+     * 查询天瑜小程序关于我们页面
+     * @return
+     */
+    public Map<String, String> listTianyuWxAbout() {
+        LitemallSystemExample example = new LitemallSystemExample();
+        example.or().andKeyNameLike("tianyu_wx_about_%").andDeletedEqualTo(false);
+        List<LitemallSystem> systemList = systemMapper.selectByExample(example);
+        Map<String, String> data = new HashMap<>();
+        for(LitemallSystem system : systemList){
+            data.put(system.getKeyName(), system.getKeyValue());
+        }
+        return data;
+    }
 }

@@ -22,7 +22,26 @@ public class LitemallAdService {
         return adMapper.selectByExample(example);
     }
 
-    public List<LitemallAd> querySelective(String name, String content, Integer page, Integer limit, String sort, String order) {
+    public List<LitemallAd> queryByPosition(byte position) {
+        LitemallAdExample example = new LitemallAdExample();
+        LitemallAdExample.Criteria criteria1 = example.or();
+        LitemallAdExample.Criteria criteria2 = example.or();
+        LitemallAdExample.Criteria criteria3 = example.or();
+        LitemallAdExample.Criteria criteria4 = example.or();
+
+        criteria1.andStartTimeIsNull().andEndTimeIsNull();
+        criteria2.andStartTimeIsNull().andEndTimeGreaterThanOrEqualTo(LocalDateTime.now());
+        criteria3.andStartTimeLessThanOrEqualTo(LocalDateTime.now()).andEndTimeIsNull();
+        criteria4.andStartTimeLessThanOrEqualTo(LocalDateTime.now()).andEndTimeGreaterThanOrEqualTo(LocalDateTime.now());
+
+        criteria1.andPositionEqualTo(position).andDeletedEqualTo(false).andEnabledEqualTo(true);
+        criteria2.andPositionEqualTo(position).andDeletedEqualTo(false).andEnabledEqualTo(true);
+        criteria3.andPositionEqualTo(position).andDeletedEqualTo(false).andEnabledEqualTo(true);
+        criteria4.andPositionEqualTo(position).andDeletedEqualTo(false).andEnabledEqualTo(true);
+        return adMapper.selectByExample(example);
+    }
+
+    public List<LitemallAd> querySelective(String name, String content, Integer position, Integer page, Integer limit, String sort, String order) {
         LitemallAdExample example = new LitemallAdExample();
         LitemallAdExample.Criteria criteria = example.createCriteria();
 
@@ -31,6 +50,9 @@ public class LitemallAdService {
         }
         if (!StringUtils.isEmpty(content)) {
             criteria.andContentLike("%" + content + "%");
+        }
+        if (!StringUtils.isEmpty(position)) {
+            criteria.andPositionEqualTo(position.byteValue());
         }
         criteria.andDeletedEqualTo(false);
 

@@ -4,21 +4,18 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.linlinjava.litemall.admin.annotation.RequiresPermissionsDesc;
+import org.linlinjava.litemall.admin.service.AdminCourseService;
 import org.linlinjava.litemall.core.util.DateTimeUtil;
 import org.linlinjava.litemall.core.util.ResponseUtil;
 import org.linlinjava.litemall.core.validator.Order;
 import org.linlinjava.litemall.core.validator.Sort;
 import org.linlinjava.litemall.db.domain.TianyuCoursePlan;
 import org.linlinjava.litemall.db.service.TianyuCoursePlanService;
-import org.linlinjava.litemall.db.service.TianyuCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -30,7 +27,7 @@ public class AdminCoursePlanController {
     @Autowired
     private TianyuCoursePlanService coursePlanService;
     @Autowired
-    private TianyuCourseService courseService;
+    private AdminCourseService adminCourseService;
 
     @RequiresPermissions("admin:coursePlan:list")
     @RequiresPermissionsDesc(menu = {"天瑜瑜伽", "课程安排"}, button = "查询")
@@ -97,7 +94,7 @@ public class AdminCoursePlanController {
 
     @RequiresPermissions("admin:coursePlan:createBat")
     @RequiresPermissionsDesc(menu = {"天瑜瑜伽", "课程安排"}, button = "批量添加")
-    @GetMapping("/createBat")
+    @PostMapping("/createBat")
     public Object createBat(String addDate) {
         if (addDate == null || "".equals(addDate)) {
             return ResponseUtil.badArgument();
@@ -106,7 +103,7 @@ public class AdminCoursePlanController {
         if(coursePlanList != null && coursePlanList.size() > 0) {
             return ResponseUtil.existingArgument();
         }
-        List<TianyuCoursePlan> rtnCoursePlanList = coursePlanService.addBat(DateTimeUtil.stringToLocalDate(addDate));
+        List<TianyuCoursePlan> rtnCoursePlanList = adminCourseService.addBat(DateTimeUtil.stringToLocalDate(addDate));
         return ResponseUtil.okList(rtnCoursePlanList);
     }
 

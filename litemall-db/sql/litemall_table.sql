@@ -831,7 +831,7 @@ CREATE TABLE `tianyu_order` (
   `order_status` smallint(6) NOT NULL COMMENT '订单状态',
   `consignee` varchar(63) NOT NULL COMMENT '学员名称',
   `mobile` varchar(63) NOT NULL COMMENT '学员手机号',
-  `comments` smallint(6) DEFAULT '0' COMMENT '订单待评价次数',
+  `comments` int(11) DEFAULT '0' COMMENT '评价ID，-1不可评价，0可评价，其他是评价ID',
   `end_time` datetime DEFAULT NULL COMMENT '订单结束时间',
   `add_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',

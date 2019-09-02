@@ -9,6 +9,7 @@ public class UserInfo {
     private String language;
     private Byte gender;
     private String phoneNumber;
+    private Integer courseNum;
 
     public String getCountry() {
         return country;
@@ -73,4 +74,13 @@ public class UserInfo {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public Integer getCourseNum() {
+        return courseNum;
+    }
+
+    public void setCourseNum(Integer courseNum) {
+        this.courseNum = courseNum;
+    }
+
 }

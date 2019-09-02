@@ -166,6 +166,7 @@ public class WxAuthController {
                 return ResponseUtil.updatedDataFailed();
             }
             userInfo.setPhoneNumber(user.getMobile());
+            userInfo.setCourseNum(user.getCourseNum());
         }
 
         // token

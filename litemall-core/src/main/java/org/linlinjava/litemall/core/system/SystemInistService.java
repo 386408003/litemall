@@ -7,6 +7,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -131,7 +132,7 @@ class SystemInistService {
                 SystemConfig.getNewLimit() + "," + SystemConfig.getHotLimit() + "," + SystemConfig.getBrandLimit() +
                         "," + SystemConfig.getTopicLimit() + "," + SystemConfig.getCatlogListLimit() + "," + SystemConfig.getCatlogMoreLimit());
         infos.put("天瑜后台批量添加课程配置信息：StartTime,EndTime,CoursePlan",
-                SystemConfig.getTianyuAdminStarttime() + "," + SystemConfig.getTianyuAdminEndtime() + "," + SystemConfig.getTianyuAdminCoursePlan());
+                SystemConfig.getTianyuAdminStarttime() + "," + SystemConfig.getTianyuAdminEndtime() + "," + Arrays.toString(SystemConfig.getTianyuAdminCoursePlan()));
         return infos;
     }
 }

@@ -21,4 +21,8 @@ public class AdminResponseCode {
     public static final Integer ROLE_SUPER_SUPERMISSION = 641;
     public static final Integer ROLE_USER_EXIST = 642;
 
+    /**
+     * 天瑜错误码，从660开始
+     */
+    public static final Integer COURSE_PLAN_EXIST = 660;
 }

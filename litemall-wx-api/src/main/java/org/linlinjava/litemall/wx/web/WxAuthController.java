@@ -15,6 +15,7 @@ import org.linlinjava.litemall.core.util.bcrypt.BCryptPasswordEncoder;
 import org.linlinjava.litemall.db.domain.LitemallUser;
 import org.linlinjava.litemall.db.service.CouponAssignService;
 import org.linlinjava.litemall.db.service.LitemallUserService;
+import org.linlinjava.litemall.db.util.SystemType;
 import org.linlinjava.litemall.wx.annotation.LoginUser;
 import org.linlinjava.litemall.wx.dto.UserInfo;
 import org.linlinjava.litemall.wx.dto.UserToken;
@@ -139,6 +140,7 @@ public class WxAuthController {
         LitemallUser user = userService.queryByOid(openId);
         if (user == null) {
             user = new LitemallUser();
+            user.setSystemId(SystemType.TIANYU.getType());
             user.setUsername(openId);
             user.setPassword(openId);
             user.setWeixinOpenid(openId);
@@ -147,6 +149,7 @@ public class WxAuthController {
             user.setGender(userInfo.getGender());
             user.setUserLevel((byte) 0);
             user.setStatus((byte) 0);
+            user.setCourseNum(0);
             user.setLastLoginTime(LocalDateTime.now());
             user.setLastLoginIp(IpUtil.getIpAddr(request));
             user.setSessionKey(sessionKey);
@@ -154,7 +157,7 @@ public class WxAuthController {
             userService.add(user);
 
             // 新用户发送注册优惠券
-            couponAssignService.assignForRegister(user.getId());
+            // couponAssignService.assignForRegister(user.getId());
         } else {
             user.setLastLoginTime(LocalDateTime.now());
             user.setLastLoginIp(IpUtil.getIpAddr(request));
@@ -162,6 +165,7 @@ public class WxAuthController {
             if (userService.updateById(user) == 0) {
                 return ResponseUtil.updatedDataFailed();
             }
+            userInfo.setPhoneNumber(user.getMobile());
         }
 
         // token
@@ -289,6 +293,7 @@ public class WxAuthController {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodedPassword = encoder.encode(password);
         user = new LitemallUser();
+        user.setSystemId(SystemType.TIANYU.getType());
         user.setUsername(username);
         user.setPassword(encodedPassword);
         user.setMobile(mobile);
@@ -298,6 +303,7 @@ public class WxAuthController {
         user.setGender((byte) 0);
         user.setUserLevel((byte) 0);
         user.setStatus((byte) 0);
+        user.setCourseNum(0);
         user.setLastLoginTime(LocalDateTime.now());
         user.setLastLoginIp(IpUtil.getIpAddr(request));
         userService.add(user);

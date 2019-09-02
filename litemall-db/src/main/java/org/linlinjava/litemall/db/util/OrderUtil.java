@@ -1,6 +1,7 @@
 package org.linlinjava.litemall.db.util;
 
 import org.linlinjava.litemall.db.domain.LitemallOrder;
+import org.linlinjava.litemall.db.domain.TianyuOrder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,14 @@ import java.util.List;
  * 当301商家已发货时，此时用户可以有确认收货
  * 当401用户确认收货以后，此时用户可以进行的操作是退货、删除、去评价或者再次购买
  * 当402系统自动确认收货以后，此时用户可以删除、去评价、或者再次购买
+ *
+ *
+ * course订单状态
+ * 订单流程：预约成功－》上课
+ * 订单状态：
+ * 101 订单生成；102，下单未上课用户取消(提前两个小时)；
+ * 302 学员上课时间已过，自动确认上课；
+ * 402 系统自动结束订单。(晚上零点以后)
  */
 public class OrderUtil {
 
@@ -29,9 +38,14 @@ public class OrderUtil {
     public static final Short STATUS_AUTO_CANCEL = 103;
     public static final Short STATUS_REFUND = 202;
     public static final Short STATUS_REFUND_CONFIRM = 203;
+    public static final Short STATUS_AUTO_USE = 302;
     public static final Short STATUS_AUTO_CONFIRM = 402;
 
-
+    /**
+     * 小商城订单代码对应订单名称
+     * @param order
+     * @return
+     */
     public static String orderStatusText(LitemallOrder order) {
         int status = order.getOrderStatus().intValue();
 
@@ -74,7 +88,11 @@ public class OrderUtil {
         throw new IllegalStateException("orderStatus不支持");
     }
 
-
+    /**
+     * 设置小商城订单可进行操作的状态
+     * @param order
+     * @return
+     */
     public static OrderHandleOption build(LitemallOrder order) {
         int status = order.getOrderStatus().intValue();
         OrderHandleOption handleOption = new OrderHandleOption();
@@ -110,36 +128,11 @@ public class OrderUtil {
         return handleOption;
     }
 
-    public static List<Short> orderStatus(Integer showType) {
-        // 全部订单
-        if (showType == 0) {
-            return null;
-        }
-
-        List<Short> status = new ArrayList<Short>(2);
-
-        if (showType.equals(1)) {
-            // 待付款订单
-            status.add((short) 101);
-        } else if (showType.equals(2)) {
-            // 待发货订单
-            status.add((short) 201);
-        } else if (showType.equals(3)) {
-            // 待收货订单
-            status.add((short) 301);
-        } else if (showType.equals(4)) {
-            // 待评价订单
-            status.add((short) 401);
-//            系统超时自动取消，此时应该不支持评价
-//            status.add((short)402);
-        } else {
-            return null;
-        }
-
-        return status;
-    }
-
-
+    /**
+     * 小商城订单状态
+     * @param litemallOrder
+     * @return
+     */
     public static boolean isCreateStatus(LitemallOrder litemallOrder) {
         return OrderUtil.STATUS_CREATE == litemallOrder.getOrderStatus().shortValue();
     }
@@ -175,4 +168,120 @@ public class OrderUtil {
     public static boolean isAutoConfirmStatus(LitemallOrder litemallOrder) {
         return OrderUtil.STATUS_AUTO_CONFIRM == litemallOrder.getOrderStatus().shortValue();
     }
+
+
+    /**
+     * 天瑜瑜珈订单代码对应订单名称
+     * @param order
+     * @return
+     */
+    public static String orderStatusText(TianyuOrder order) {
+        int status = order.getOrderStatus().intValue();
+
+        if (status == 101) {
+            return "已预约";
+        }
+
+        if (status == 102) {
+            return "已取消";
+        }
+
+        if (status == 302) {
+            return "已上课(系统)";
+        }
+
+        if (status == 402) {
+            return "已结束(系统)";
+        }
+
+        throw new IllegalStateException("orderStatus不支持");
+    }
+
+    /**
+     * 设置天瑜瑜珈订单可进行操作的状态
+     * @param order
+     * @return
+     */
+    public static OrderHandleOption build(TianyuOrder order) {
+        int status = order.getOrderStatus().intValue();
+        OrderHandleOption handleOption = new OrderHandleOption();
+
+        if (status == 101) {
+            // 如果订单没有被取消，则可取消
+            handleOption.setCancel(true);
+        } else if (status == 102) {
+            // 如果订单已经取消，则可删除
+            handleOption.setDelete(true);
+        } else if (status == 302) {
+            // 如果订单已经上课，则可删除
+            handleOption.setDelete(true);
+        } else if (status == 402) {
+            // 如果订单已经结束，则可删除和评论
+            handleOption.setDelete(true);
+            handleOption.setComment(true);
+        } else {
+            throw new IllegalStateException("status不支持");
+        }
+
+        return handleOption;
+    }
+
+    /**
+     * 天瑜瑜伽订单状态
+     * @param tianyuOrder
+     * @return
+     */
+    public static boolean isCreateStatus(TianyuOrder tianyuOrder) {
+        return OrderUtil.STATUS_CREATE == tianyuOrder.getOrderStatus().shortValue();
+    }
+
+    public static boolean isCancelStatus(TianyuOrder tianyuOrder) {
+        return OrderUtil.STATUS_CANCEL == tianyuOrder.getOrderStatus().shortValue();
+    }
+
+    public static boolean isConfirmUse(TianyuOrder tianyuOrder) {
+        return OrderUtil.STATUS_AUTO_USE == tianyuOrder.getOrderStatus().shortValue();
+    }
+
+    public static boolean isAutoFinishStatus(TianyuOrder tianyuOrder) {
+        return OrderUtil.STATUS_AUTO_CONFIRM == tianyuOrder.getOrderStatus().shortValue();
+    }
+
+
+    /**
+     * 按照showType查询展示订单各个状态列表
+     * @param showType
+     * @return
+     */
+    public static List<Short> orderStatus(Integer showType) {
+        // 全部订单
+        if (showType == 0) {
+            return null;
+        }
+
+        List<Short> status = new ArrayList<Short>(2);
+
+        if (showType.equals(1)) {
+            // 待付款订单
+            status.add((short) 101);
+        } else if (showType.equals(2)) {
+            // 待发货订单
+            status.add((short) 201);
+        } else if (showType.equals(3)) {
+            // 待收货订单
+            // TODO 小商城系统使用301，天瑜瑜珈使用302
+            // status.add((short) 301);
+            status.add((short) 302);
+        } else if (showType.equals(4)) {
+            // 待评价订单
+            // TODO 小商城系统超时自动取消使用401，天瑜瑜珈使用402
+            // status.add((short) 401);
+            status.add((short) 402);
+        } else {
+            return null;
+        }
+
+        return status;
+    }
+
 }

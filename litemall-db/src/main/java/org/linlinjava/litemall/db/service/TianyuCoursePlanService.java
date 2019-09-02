@@ -1,7 +1,6 @@
 package org.linlinjava.litemall.db.service;
 
 import com.github.pagehelper.PageHelper;
-import org.linlinjava.litemall.db.dao.TianyuCourseMapper;
 import org.linlinjava.litemall.db.dao.TianyuCoursePlanMapper;
 import org.linlinjava.litemall.db.domain.TianyuCoursePlan;
 import org.linlinjava.litemall.db.domain.TianyuCoursePlanExample;
@@ -17,9 +16,6 @@ import java.util.List;
 public class TianyuCoursePlanService {
     @Resource
     private TianyuCoursePlanMapper coursePlanMapper;
-
-    @Resource
-    private TianyuCourseMapper courseMapper;
 
     public List<TianyuCoursePlan> queryIndex() {
         TianyuCoursePlanExample example = new TianyuCoursePlanExample();
@@ -50,7 +46,7 @@ public class TianyuCoursePlanService {
         return coursePlanMapper.selectByExample(example);
     }
 
-    public int updateById(TianyuCoursePlan coursePlan) {
+    public int update(TianyuCoursePlan coursePlan) {
         coursePlan.setUpdateTime(LocalDateTime.now());
         return coursePlanMapper.updateByPrimaryKeySelective(coursePlan);
     }

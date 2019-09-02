@@ -29,6 +29,10 @@ public class LitemallSystemConfigService {
         return systemConfigs;
     }
 
+    /**
+     * 后台查询商场配置
+     * @return
+     */
     public Map<String, String> listMail() {
         LitemallSystemExample example = new LitemallSystemExample();
         example.or().andKeyNameLike("litemall_mall_%").andDeletedEqualTo(false);
@@ -40,6 +44,10 @@ public class LitemallSystemConfigService {
         return data;
     }
 
+    /**
+     * 后台查询商场微信小程序配置
+     * @return
+     */
     public Map<String, String> listWx() {
         LitemallSystemExample example = new LitemallSystemExample();
         example.or().andKeyNameLike("litemall_wx_%").andDeletedEqualTo(false);
@@ -51,6 +59,10 @@ public class LitemallSystemConfigService {
         return data;
     }
 
+    /**
+     * 后台查询订单配置
+     * @return
+     */
     public Map<String, String> listOrder() {
         LitemallSystemExample example = new LitemallSystemExample();
         example.or().andKeyNameLike("litemall_order_%").andDeletedEqualTo(false);
@@ -62,9 +74,43 @@ public class LitemallSystemConfigService {
         return data;
     }
 
+    /**
+     * 后台查询运费配置
+     * @return
+     */
     public Map<String, String> listExpress() {
         LitemallSystemExample example = new LitemallSystemExample();
         example.or().andKeyNameLike("litemall_express_%").andDeletedEqualTo(false);
+        List<LitemallSystem> systemList = systemMapper.selectByExample(example);
+        Map<String, String> data = new HashMap<>();
+        for(LitemallSystem system : systemList){
+            data.put(system.getKeyName(), system.getKeyValue());
+        }
+        return data;
+    }
+
+    /**
+     * 后台查询所有课程配置
+     * @return
+     */
+    public Map<String, String> listTianyuCourse() {
+        LitemallSystemExample example = new LitemallSystemExample();
+        example.or().andKeyNameLike("tianyu_admin_%").andDeletedEqualTo(false);
+        List<LitemallSystem> systemList = systemMapper.selectByExample(example);
+        Map<String, String> data = new HashMap<>();
+        for(LitemallSystem system : systemList){
+            data.put(system.getKeyName(), system.getKeyValue());
+        }
+        return data;
+    }
+
+    /**
+     * 后台查询所有天瑜微信配置
+     * @return
+     */
+    public Map<String, String> listTianyuWx() {
+        LitemallSystemExample example = new LitemallSystemExample();
+        example.or().andKeyNameLike("tianyu_wx_%").andDeletedEqualTo(false);
         List<LitemallSystem> systemList = systemMapper.selectByExample(example);
         Map<String, String> data = new HashMap<>();
         for(LitemallSystem system : systemList){
@@ -97,7 +143,7 @@ public class LitemallSystemConfigService {
     }
 
     /**
-     * 查询天瑜小程序首页描述
+     * 微信小程序查询天瑜小程序首页描述
      * @return
      */
     public List<LitemallSystem> listTianyuWxHome() {
@@ -108,7 +154,7 @@ public class LitemallSystemConfigService {
     }
 
     /**
-     * 查询天瑜小程序关于我们页面
+     * 微信小程序查询天瑜小程序关于我们页面
      * @return
      */
     public Map<String, String> listTianyuWxAbout() {
@@ -121,4 +167,5 @@ public class LitemallSystemConfigService {
         }
         return data;
     }
+
 }

@@ -27,7 +27,7 @@ public class WxCourseController {
     private WxCourseService courseInfoService;
 
     @GetMapping("/list")
-    public Object list(String cDate) {
+    public Object list() {
         List<Map<String, Object>> calendar = DateTimeUtil.initCalendar(7);
         for(Map<String, Object> tempMap : calendar) {
             List<WxCourseInfo> courseInfoList = courseInfoService.findByCDate((LocalDate) tempMap.get("date"));

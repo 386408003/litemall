@@ -1,5 +1,6 @@
 package org.linlinjava.litemall.admin.service;
 
+import org.linlinjava.litemall.core.system.SystemConfig;
 import org.linlinjava.litemall.core.util.DateTimeUtil;
 import org.linlinjava.litemall.db.domain.TianyuCourse;
 import org.linlinjava.litemall.db.domain.TianyuCoursePlan;
@@ -21,14 +22,23 @@ public class AdminCourseService {
     @Autowired
     private TianyuCoursePlanService coursePlanService;
 
+    /**
+     * 通过日期批量添加一天的课程
+     * @param addDate
+     * @return
+     */
     public List<TianyuCoursePlan> addBat(LocalDate addDate) {
-        LocalTime startTime = DateTimeUtil.stringToLocalTimeShort("08:00");
+        // LocalTime startTime = DateTimeUtil.stringToLocalTimeShort("08:00");
+        LocalTime startTime = SystemConfig.getTianyuAdminStarttime();
         LocalTime endTime = null;
         List<TianyuCoursePlan> coursePlans = new ArrayList<TianyuCoursePlan>();
+        int i=0;
         while (true) {
             // 一对一私教
-            TianyuCourse course = courseService.findById(1);
-            endTime = addLocalTime(startTime, course.getTotalTime());
+            // TianyuCourse course = courseService.findById(1);
+            TianyuCourse course = courseService.findById(SystemConfig.getTianyuAdminCoursePlan()[i]);
+            endTime = startTime.plusMinutes(course.getTotalTime());
+            // endTime = addLocalTime(startTime, course.getTotalTime());
             TianyuCoursePlan coursePlan = new TianyuCoursePlan();
             coursePlan.setCourseId(course.getId());
             coursePlan.setcDate(addDate);
@@ -39,10 +49,12 @@ public class AdminCourseService {
             coursePlans.add(coursePlan);
             startTime = endTime;
             endTime = null;
-            LocalTime endStatus = DateTimeUtil.stringToLocalTimeShort("20:00");
+            // LocalTime endStatus = DateTimeUtil.stringToLocalTimeShort("20:00");
+            LocalTime endStatus = SystemConfig.getTianyuAdminEndtime();
             if(endStatus.getHour() <= startTime.getHour()) {
                 break;
             }
+            i++;
         }
         return coursePlans;
     }

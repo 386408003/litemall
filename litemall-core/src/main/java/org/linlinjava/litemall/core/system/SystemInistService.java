@@ -53,6 +53,23 @@ class SystemInistService {
         DEFAULT_CONFIGS.put(SystemConfig.LITEMALL_MALL_ADDRESS, "上海");
         DEFAULT_CONFIGS.put(SystemConfig.LITEMALL_MALL_PHONE, "021-xxxx-xxxx");
         DEFAULT_CONFIGS.put(SystemConfig.LITEMALL_MALL_QQ, "738696120");
+        // 课程计划批量添加配置
+        DEFAULT_CONFIGS.put(SystemConfig.TIANYU_ADMIN_STARTTIME, "08:00");
+        DEFAULT_CONFIGS.put(SystemConfig.TIANYU_ADMIN_ENDTIME, "20:00");
+        DEFAULT_CONFIGS.put(SystemConfig.TIANYU_ADMIN_COURSEPLAN, "1,1,1,1,1,1,1,1,1,1,1,1");
+        // 微信小程序首页配置默认值
+        DEFAULT_CONFIGS.put(SystemConfig.TIANYU_WX_HOME_TITLE, "天瑜瑜伽工作室简介");
+        DEFAULT_CONFIGS.put(SystemConfig.TIANYU_WX_HOME_INFO, "天瑜瑜伽工作室课程体系属于人体功能恢复瑜伽体系。");
+        // 微信小程序关于页面配置默认值
+        DEFAULT_CONFIGS.put(SystemConfig.TIANYU_WX_ABOUT_NAME, "天瑜瑜珈工作室");
+        DEFAULT_CONFIGS.put(SystemConfig.TIANYU_WX_ABOUT_DESC, "天瑜瑜珈工作室");
+        DEFAULT_CONFIGS.put(SystemConfig.TIANYU_WX_ABOUT_ADDRESS, "郑州市经开区九大街航海路交叉口南500米");
+        DEFAULT_CONFIGS.put(SystemConfig.TIANYU_WX_ABOUT_PHONE, "15617927721");
+        DEFAULT_CONFIGS.put(SystemConfig.TIANYU_WX_ABOUT_QQNUMBER, "386408003");
+        DEFAULT_CONFIGS.put(SystemConfig.TIANYU_WX_ABOUT_LATITUDE, "34.718656");
+        DEFAULT_CONFIGS.put(SystemConfig.TIANYU_WX_ABOUT_LONGITUDE, "113.769854");
+        DEFAULT_CONFIGS.put(SystemConfig.TIANYU_WX_ABOUT_SCALE, "14");
+        DEFAULT_CONFIGS.put(SystemConfig.TIANYU_WX_ABOUT_VERSION, "1.0.0");
     }
 
     @Autowired
@@ -113,7 +130,8 @@ class SystemInistService {
         infos.put("首页显示记录数：NEW,HOT,BRAND,TOPIC,CatlogList,CatlogMore",
                 SystemConfig.getNewLimit() + "," + SystemConfig.getHotLimit() + "," + SystemConfig.getBrandLimit() +
                         "," + SystemConfig.getTopicLimit() + "," + SystemConfig.getCatlogListLimit() + "," + SystemConfig.getCatlogMoreLimit());
-
+        infos.put("天瑜后台批量添加课程配置信息：StartTime,EndTime,CoursePlan",
+                SystemConfig.getTianyuAdminStarttime() + "," + SystemConfig.getTianyuAdminEndtime() + "," + SystemConfig.getTianyuAdminCoursePlan());
         return infos;
     }
 }

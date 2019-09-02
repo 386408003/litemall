@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+import static org.linlinjava.litemall.admin.util.AdminResponseCode.COURSE_PLAN_EXIST;
+
 @RestController
 @RequestMapping("/admin/coursePlan")
 @Validated
@@ -73,7 +75,7 @@ public class AdminCoursePlanController {
         if (error != null) {
             return error;
         }
-        if (coursePlanService.updateById(coursePlan) == 0) {
+        if (coursePlanService.update(coursePlan) == 0) {
             return ResponseUtil.updatedDataFailed();
         }
 
@@ -101,7 +103,7 @@ public class AdminCoursePlanController {
         }
         List<TianyuCoursePlan> coursePlanList = coursePlanService.findByCDate(DateTimeUtil.stringToLocalDate(addDate));
         if(coursePlanList != null && coursePlanList.size() > 0) {
-            return ResponseUtil.existingArgument();
+            return ResponseUtil.fail(COURSE_PLAN_EXIST, "当日已有课程数据存在，不可批量添加");
         }
         List<TianyuCoursePlan> rtnCoursePlanList = adminCourseService.addBat(DateTimeUtil.stringToLocalDate(addDate));
         return ResponseUtil.okList(rtnCoursePlanList);

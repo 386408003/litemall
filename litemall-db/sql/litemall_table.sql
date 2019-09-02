@@ -145,7 +145,7 @@ DROP TABLE IF EXISTS `litemall_category`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `litemall_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `system_id` int(11) NOT NULL DEFAULT '1' COMMENT '系统ID',
+  `system_id` int(11) NOT NULL DEFAULT '1' COMMENT '系统ID，1商城，2天瑜',
   `name` varchar(63) NOT NULL DEFAULT '' COMMENT '类目名称',
   `keywords` varchar(1023) NOT NULL DEFAULT '' COMMENT '类目关键字，以JSON数组格式',
   `desc` varchar(255) DEFAULT '' COMMENT '类目广告语介绍',
@@ -729,6 +729,7 @@ DROP TABLE IF EXISTS `litemall_user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `litemall_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `system_id` int(11) NOT NULL DEFAULT '1' COMMENT '系统ID，1商城，2天瑜',
   `username` varchar(63) NOT NULL COMMENT '用户名称',
   `password` varchar(63) NOT NULL DEFAULT '' COMMENT '用户密码',
   `gender` tinyint(3) NOT NULL DEFAULT '0' COMMENT '性别：0 未知， 1男， 1 女',
@@ -742,6 +743,7 @@ CREATE TABLE `litemall_user` (
   `weixin_openid` varchar(63) NOT NULL DEFAULT '' COMMENT '微信登录openid',
   `session_key` varchar(100) NOT NULL DEFAULT '' COMMENT '微信登录会话KEY',
   `status` tinyint(3) NOT NULL DEFAULT '0' COMMENT '0 可用, 1 禁用, 2 注销',
+  `course_num` int(5) NOT NULL DEFAULT '0' COMMENT '课时总数量',
   `add_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `deleted` tinyint(1) DEFAULT '0' COMMENT '逻辑删除',
@@ -813,6 +815,30 @@ CREATE TABLE `tianyu_course_plan` (
   UNIQUE KEY `course_date_time` (`course_id`,`c_date`,`start_time`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='天瑜排课记录表';
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `tianyu_order`
+--
+
+DROP TABLE IF EXISTS `tianyu_order`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tianyu_order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL COMMENT '用户表的用户ID',
+  `plan_id` int(11) NOT NULL COMMENT '课程计划表ID',
+  `order_sn` varchar(63) NOT NULL COMMENT '订单编号',
+  `order_status` smallint(6) NOT NULL COMMENT '订单状态',
+  `consignee` varchar(63) NOT NULL COMMENT '学员名称',
+  `mobile` varchar(63) NOT NULL COMMENT '学员手机号',
+  `comments` smallint(6) DEFAULT '0' COMMENT '订单待评价次数',
+  `end_time` datetime DEFAULT NULL COMMENT '订单结束时间',
+  `add_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `deleted` tinyint(1) DEFAULT '0' COMMENT '逻辑删除',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='约课记录表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -824,3 +850,4 @@ CREATE TABLE `tianyu_course_plan` (
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2018-12-10 16:59:09
+

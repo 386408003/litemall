@@ -5,16 +5,18 @@ import org.apache.commons.logging.LogFactory;
 import org.linlinjava.litemall.core.system.SystemConfig;
 import org.linlinjava.litemall.db.domain.LitemallOrder;
 import org.linlinjava.litemall.db.domain.LitemallOrderGoods;
-import org.linlinjava.litemall.db.service.LitemallGoodsProductService;
-import org.linlinjava.litemall.db.service.LitemallOrderGoodsService;
-import org.linlinjava.litemall.db.service.LitemallOrderService;
+import org.linlinjava.litemall.db.domain.TianyuCoursePlan;
+import org.linlinjava.litemall.db.domain.TianyuOrder;
+import org.linlinjava.litemall.db.service.*;
 import org.linlinjava.litemall.db.util.OrderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -30,6 +32,61 @@ public class OrderJob {
     private LitemallOrderService orderService;
     @Autowired
     private LitemallGoodsProductService productService;
+    @Autowired
+    private TianyuOrderService tianyuOrderService;
+    @Autowired
+    private TianyuCoursePlanService coursePlanService;
+
+    /**
+     * 自动设置已上课
+     * <p>
+     * 定时检查课程订单是否超过上课时间
+     * 定时时间是每个小时的第一分钟
+     * <p>
+     */
+    @Scheduled(cron = "0 1 * * * ?")
+    public void checkOrderUse() {
+        logger.info("系统开启任务检查课程订单是否已经超期未上课");
+
+        List<TianyuOrder> orderList = tianyuOrderService.queryUnuse();
+        for (TianyuOrder order : orderList) {
+            TianyuCoursePlan coursePlan = coursePlanService.findById(order.getPlanId());
+            // 检测是否超期
+            LocalDate limitDate = coursePlan.getcDate();
+            if(LocalDate.now().compareTo(limitDate) > 0) {
+                order.setOrderStatus(OrderUtil.STATUS_AUTO_USE);
+                tianyuOrderService.updateWithOptimisticLocker(order);
+            } else if(LocalDate.now().compareTo(limitDate) == 0) {
+                LocalTime limitTime = coursePlan.getStartTime();
+                if (LocalTime.now().compareTo(limitTime) > 0) {
+                    order.setOrderStatus(OrderUtil.STATUS_AUTO_USE);
+                    tianyuOrderService.updateWithOptimisticLocker(order);
+                }
+            }
+            logger.info("订单 ID：" + order.getId() + " 已经超期自动确认上课");
+        }
+    }
+
+    /**
+     * 自动设置订单完成状态
+     * <p>
+     * 定时检查课程订单是否已上课，已经上课则修改为完成状态
+     * 定时时间是每天半夜零点
+     * <p>
+     */
+    @Scheduled(cron = "0 0 0 * * ?")
+    public void checkOrderFinish() {
+        logger.info("系统开启任务检查课程订单是否已经完成");
+
+        List<TianyuOrder> orderList = tianyuOrderService.queryUnFinish();
+        for (TianyuOrder order : orderList) {
+            order.setComments(0);
+            order.setOrderStatus(OrderUtil.STATUS_AUTO_CONFIRM);
+            tianyuOrderService.updateWithOptimisticLocker(order);
+
+            logger.info("订单 ID" + order.getId() + " 已经自动确认完成订单");
+        }
+    }
 
     /**
      * 自动取消订单
@@ -40,7 +97,7 @@ public class OrderJob {
      * TODO
      * 注意，因为是相隔半小时检查，因此导致订单真正超时时间是 [LITEMALL_ORDER_UNPAID, 30 + LITEMALL_ORDER_UNPAID]
      */
-    @Scheduled(fixedDelay = 30 * 60 * 1000)
+    //@Scheduled(fixedDelay = 30 * 60 * 1000)
     @Transactional(rollbackFor = Exception.class)
     public void checkOrderUnpaid() {
         logger.info("系统开启任务检查订单是否已经超期自动取消订单");
@@ -77,7 +134,7 @@ public class OrderJob {
      * TODO
      * 注意，因为是相隔一天检查，因此导致订单真正超时时间是 [LITEMALL_ORDER_UNCONFIRM, 1 + LITEMALL_ORDER_UNCONFIRM]
      */
-    @Scheduled(cron = "0 0 3 * * ?")
+    //@Scheduled(cron = "0 0 3 * * ?")
     public void checkOrderUnconfirm() {
         logger.info("系统开启任务检查订单是否已经超期自动确认收货");
 
@@ -104,7 +161,7 @@ public class OrderJob {
      * TODO
      * 注意，因为是相隔一天检查，因此导致订单真正超时时间是 [LITEMALL_ORDER_COMMENT, 1 + LITEMALL_ORDER_COMMENT]
      */
-    @Scheduled(cron = "0 0 4 * * ?")
+    //@Scheduled(cron = "0 0 4 * * ?")
     public void checkOrderComment() {
         logger.info("系统开启任务检查订单是否已经超期未评价");
 

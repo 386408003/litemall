@@ -33,5 +33,10 @@ public class WxResponseCode {
     public static final int COUPON_RECEIVE_FAIL= 741;
     public static final int COUPON_CODE_INVALID= 742;
 
-
+    /**
+     * 天瑜错误码从760开始
+     */
+    public static final Integer COURSE_PLAN_LIMIT= 760;
+    public static final Integer USER_COURSENUM_LIMIT= 761;
+    public static final Integer ORDER_TIME_LIMIT = 762;
 }

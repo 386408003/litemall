@@ -62,7 +62,7 @@ public class AdminConfigController {
     @RequiresPermissions("admin:config:order:list")
     @RequiresPermissionsDesc(menu = {"配置管理", "订单配置"}, button = "详情")
     @GetMapping("/order")
-    public Object lisOrder() {
+    public Object listOrder() {
         Map<String, String> data = systemConfigService.listOrder();
         return ResponseUtil.ok(data);
     }
@@ -73,6 +73,7 @@ public class AdminConfigController {
     public Object updateOrder(@RequestBody String body) {
         Map<String, String> data = JacksonUtil.toMap(body);
         systemConfigService.updateConfig(data);
+        SystemConfig.updateConfigs(data);
         return ResponseUtil.ok();
     }
 
@@ -88,6 +89,42 @@ public class AdminConfigController {
     @RequiresPermissionsDesc(menu = {"配置管理", "小程序配置"}, button = "编辑")
     @PostMapping("/wx")
     public Object updateWx(@RequestBody String body) {
+        Map<String, String> data = JacksonUtil.toMap(body);
+        systemConfigService.updateConfig(data);
+        SystemConfig.updateConfigs(data);
+        return ResponseUtil.ok();
+    }
+
+    @RequiresPermissions("admin:config:tianyuCourse:list")
+    @RequiresPermissionsDesc(menu = {"配置管理", "天瑜课程配置"}, button = "详情")
+    @GetMapping("/tianyuCourse")
+    public Object listTianyuCourse() {
+        Map<String, String> data = systemConfigService.listTianyuCourse();
+        return ResponseUtil.ok(data);
+    }
+
+    @RequiresPermissions("admin:config:tianyuCourse:updateConfigs")
+    @RequiresPermissionsDesc(menu = {"配置管理", "天瑜课程配置"}, button = "编辑")
+    @PostMapping("/tianyuCourse")
+    public Object updateTianyuCourse(@RequestBody String body) {
+        Map<String, String> data = JacksonUtil.toMap(body);
+        systemConfigService.updateConfig(data);
+        SystemConfig.updateConfigs(data);
+        return ResponseUtil.ok();
+    }
+
+    @RequiresPermissions("admin:config:tianyuWx:list")
+    @RequiresPermissionsDesc(menu = {"配置管理", "天瑜小程序配置"}, button = "详情")
+    @GetMapping("/tianyuWx")
+    public Object listTianyuWx() {
+        Map<String, String> data = systemConfigService.listTianyuWx();
+        return ResponseUtil.ok(data);
+    }
+
+    @RequiresPermissions("admin:config:tianyuWx:updateConfigs")
+    @RequiresPermissionsDesc(menu = {"配置管理", "天瑜小程序配置"}, button = "编辑")
+    @PostMapping("/tianyuWx")
+    public Object updateTianyuWx(@RequestBody String body) {
         Map<String, String> data = JacksonUtil.toMap(body);
         systemConfigService.updateConfig(data);
         SystemConfig.updateConfigs(data);

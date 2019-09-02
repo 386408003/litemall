@@ -29,6 +29,8 @@ public class AdminDashbordController {
     private LitemallOrderService orderService;
     @Autowired
     private TianyuCourseService courseService;
+    @Autowired
+    private TianyuOrderService tianyuOrderService;
 
     @GetMapping("")
     public Object info() {
@@ -37,12 +39,14 @@ public class AdminDashbordController {
         int productTotal = productService.count();
         int orderTotal = orderService.count();
         int courseTotal = courseService.count();
+        int tianyuOrderTotal = tianyuOrderService.count();
         Map<String, Integer> data = new HashMap<>();
         data.put("userTotal", userTotal);
         data.put("goodsTotal", goodsTotal);
         data.put("productTotal", productTotal);
         data.put("orderTotal", orderTotal);
         data.put("courseTotal", courseTotal);
+        data.put("tianyuOrderTotal", tianyuOrderTotal);
 
         return ResponseUtil.ok(data);
     }

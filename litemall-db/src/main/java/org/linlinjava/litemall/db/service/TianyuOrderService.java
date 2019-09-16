@@ -62,7 +62,7 @@ public class TianyuOrderService {
         return tianyuOrderMapper.selectByExample(example);
     }
 
-    public List<TianyuOrder> querySelective(Integer userId, String orderSn, List<Short> orderStatusArray, Integer page, Integer limit, String sort, String order) {
+    public List<TianyuOrder> querySelective(Integer userId, String orderSn, String mobile, List<Short> orderStatusArray, Integer page, Integer limit, String sort, String order) {
         TianyuOrderExample example = new TianyuOrderExample();
         TianyuOrderExample.Criteria criteria = example.createCriteria();
 
@@ -71,6 +71,9 @@ public class TianyuOrderService {
         }
         if (!StringUtils.isEmpty(orderSn)) {
             criteria.andOrderSnEqualTo(orderSn);
+        }
+        if (!StringUtils.isEmpty(mobile)) {
+            criteria.andMobileEqualTo(mobile);
         }
         if (orderStatusArray != null && orderStatusArray.size() != 0) {
             criteria.andOrderStatusIn(orderStatusArray);

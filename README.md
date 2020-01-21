@@ -237,3 +237,9 @@ V 3.0.0 完成以下目标：
 
 [MIT](https://github.com/linlinjava/litemall/blob/master/LICENSE)
 Copyright (c) 2018-present linlinjava
+
+## 生产测试转换修改文件列表
+
+litemall-core/src/main/resources/application-core.yml
+
+litemall-db/src/main/resources/application-db.yml
